@@ -2,9 +2,7 @@ import React from "react";
 import { Box, Button, Container, Heading, Input, Stack, useToast } from "@chakra-ui/react"
 import {
     FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
+    FormLabel
 } from '@chakra-ui/react'
 
 import axios from "axios";
@@ -66,6 +64,9 @@ const Register = () => {
                         <Input id='password' name='password' type='password' onChange={e => handleChange(e)} />
                     </FormControl>
                     <Button onClick={handleSubmit}>Register</Button>
+                    <Button as='a' href='/login' variant='link'>
+                            Already have an account?
+                        </Button>
                 </Stack>
             </Container>
         </Box>

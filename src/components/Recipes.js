@@ -21,9 +21,7 @@ import { useUser } from "./Auth/useUser";
 
 const RecipesComponent = () => {
     const currentUser = useUser();
-    const [recipes, setRecipes] = useState({});
-
-
+    const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         MakeGET("/api/recipes").then(response => {
@@ -64,7 +62,7 @@ const RecipesComponent = () => {
 
                                 return (
                                     <Tr>
-                                        <Td _hover={{ color: '#7B68EE' }}><Heading size='sm'><a href={recipe.url}>{recipe.title}</a></Heading></Td>
+                                        <Td _hover={{ color: '#7B68EE' }}><Heading size='sm'><a href={recipe.url} target="_blank">{recipe.title}</a></Heading></Td>
                                         <Td>{recipe.username}</Td>
                                         <Td>{recipe.time}</Td>
                                         <Td>{recipe.notes}</Td>

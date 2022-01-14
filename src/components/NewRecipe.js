@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Input, Select, Stack } from "@chakra-ui/react"
+import { Box, Button, HStack, Input, Select, Stack, Textarea } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react";
 
 import * as Icons from 'react-icons/fi';
@@ -33,7 +33,7 @@ export default ({ onSave }) => {
     }
 
     return (
-        <Box w="30%">
+        <Box w="50%">
             {
                 entry ? (
                     <Stack spacing={2}>
@@ -46,7 +46,7 @@ export default ({ onSave }) => {
                             <option value='Multiple Days'>Multiple Days</option>
                         </Select>
                         {/* <Input placeholder='Time Required' ref={recipeTime} /> */}
-                        <Input placeholder='Notes' ref={recipeNotes} />
+                        <Textarea placeholder='Notes' rows='5' ref={recipeNotes} />
 
                         <Button colorScheme='blue' onClick={Save}>
                             Save

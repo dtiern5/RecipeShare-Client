@@ -5,8 +5,8 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import RecipesComponent from "./components/Recipes";
 import MyRecipesComponent from "./components/MyRecipes";
-import UsersComponent from "./components/Users";
 import ProfileComponent from "./components/Profile";
+import DeletedComponent from "./components/DeletedComponent";
 
 
 const App = () => {
@@ -44,14 +44,14 @@ const App = () => {
           element={<MyRecipesComponent />}>
         </Route>
         <Route
-          path="/users"
-          exact
-          element={<UsersComponent />}>
-        </Route>
-        <Route
           path="/profile"
           exact
           element={<ProfileComponent />}>
+        </Route>
+        <Route
+          path="/deleted"
+          exact
+          element={<DeletedComponent />}>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -61,7 +61,7 @@ const RegisterComponent = () => {
                             <FormLabel htmlFor='password'>Password</FormLabel>
                             <Input id='password' name='password' type='password' onChange={e => handleChange(e)} />
                         </FormControl>
-                        <Button onClick={handleSubmit}>Login</Button>
+                        <Button _hover={{bg: 'blue.500'}} onClick={handleSubmit}>Login</Button>
                         <Button as='a' href='/register' variant='link'>
                             Don't have an account?
                         </Button>

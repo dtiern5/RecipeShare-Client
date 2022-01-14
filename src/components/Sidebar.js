@@ -25,7 +25,7 @@ const Sidebar = () => {
                             ?  'blue.400'
                             :  null }
                             _hover={{
-                                bg: useColorModeValue('gray.300', 'gray.900'),
+                                bg: useColorModeValue('blue.100', 'gray.900'),
                                 cursor: 'pointer'
                             }}>
                             <Box mr={3}><GiKnifeFork /></Box>
@@ -45,28 +45,11 @@ const Sidebar = () => {
                             ?  'blue.400'
                             :  null }
                             _hover={{
-                                bg: useColorModeValue('gray.300', 'gray.900'),
+                                bg: useColorModeValue('blue.100', 'gray.900'),
                                 cursor: 'pointer'
                             }}>
                             <Box mr={3}><GrRestaurant /></Box>
                             <Heading size='md'>My Recipes</Heading>
-                        </Box>
-                    </Link>
-                </ListItem>
-
-                <ListItem>
-                    <Link to={"/users"}>
-                        <Box mt={2}
-                            p={4}
-                            d='flex'
-                            alignItems='center'
-                            borderRadius='lg'
-                            _hover={{
-                                bg: useColorModeValue('gray.300', 'gray.900'),
-                                cursor: 'pointer'
-                            }}>
-                            <Box mr={3}><IoIosPeople /></Box>
-                            <Heading size='md'>Users</Heading>
                         </Box>
                     </Link>
                 </ListItem>
@@ -78,8 +61,11 @@ const Sidebar = () => {
                             d='flex'
                             alignItems='center'
                             borderRadius='lg'
+                            bg={window.location.pathname == '/profile'
+                            ?  'blue.400'
+                            :  null }
                             _hover={{
-                                bg: useColorModeValue('gray.300', 'gray.900'),
+                                bg: useColorModeValue('blue.100', 'gray.900'),
                                 cursor: 'pointer'
                             }}>
                             <Box mr={3}><IoMdPerson /></Box>
@@ -89,9 +75,6 @@ const Sidebar = () => {
                 </ListItem>
 
                 <Box position='fixed' bottom='10'>
-                    <Center>
-                        <Heading mb={2} size='md'>Hi, {user.username}</Heading>
-                    </Center>
                     <Button w='full' _hover={{bg: 'orange'}} onClick={(e) => {
                         e.preventDefault();
                         Cookies.remove('jwt');
