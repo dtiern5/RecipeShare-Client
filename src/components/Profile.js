@@ -62,19 +62,19 @@ const UsersComponent = () => {
         });
     }
 
-    const onChangePass = () => {
-        const curr = currPass.current.value;
-        const repeat = repeatCurrPass.current.value;
-        const _new = newPass.current.value;
-        console.log(newData)
-        if ((curr === repeat) && _new.length > 3) {
-            console.log(_new, _new.length);
-        }
-    }
+    // const onChangePass = () => {
+    //     const curr = currPass.current.value;
+    //     const repeat = repeatCurrPass.current.value;
+    //     const _new = newPass.current.value;
+    //     console.log(newData)
+    //     if ((curr === repeat) && _new.length > 3) {
+    //         console.log(_new, _new.length);
+    //     }
+    // }
 
     return (
         <div>
-            <Modal isOpen={isOpen} onClose={onClose} onChange={setModalState}>
+            {/* <Modal isOpen={isOpen} onClose={onClose} onChange={setModalState}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Change Password</ModalHeader>
@@ -103,7 +103,7 @@ const UsersComponent = () => {
                         </Stack>
                     </ModalBody>
                 </ModalContent>
-            </Modal>
+            </Modal> */}
 
             <Header />
             <Flex p={6}>
@@ -125,11 +125,14 @@ const UsersComponent = () => {
                                 <FormLabel htmlFor='email'>Email address</FormLabel>
                                 <Input id='email' name='email' type='email' value={newData.email} onChange={e => handleChange(e)} />
                             </FormControl>
-                            <HStack>
-                                <Button _hover={{ bg: 'orange.400' }} onClick={onOpen}>Change Password</Button>
-                                <Spacer />
+                            {/* <HStack> */}
+                                {/* <Button _hover={{ bg: 'orange.400' }} onClick={onOpen}>Change Password</Button> */}
+                                {/* <Spacer /> */}
+                                <Center>
                                 <Button  _hover={{ bg: 'blue.600' }} onClick={handleSubmit}>Save Changes</Button>
-                            </HStack>
+                                </Center>
+                                
+                            {/* </HStack> */}
 
 
                         </Stack>
