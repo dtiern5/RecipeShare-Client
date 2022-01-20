@@ -22,7 +22,8 @@ export default ({ onSave }) => {
             url: recipeURL.current.value,
             time: recipeTime,
             notes: recipeNotes.current.value,
-            username: currentUser.username
+            username: currentUser.username,
+            share: false
         })
         setEntry(false)
     }

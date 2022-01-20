@@ -1,4 +1,4 @@
-import { Box, Heading, Flex, HStack, VStack, Button, useDisclosure, Collapse, FormControl, FormLabel, Textarea, Spacer, Wrap, Checkbox, Center } from "@chakra-ui/react";
+import { Box, Heading, Flex, HStack, VStack, Button, useDisclosure, Collapse, FormControl, FormLabel, Textarea, Spacer, Wrap, Checkbox, Center, useToast } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -56,6 +56,8 @@ const MyRecipesComponent = () => {
     const [activeRecipe, setActiveRecipe] = useState({});
     const [responseID, setResponseID] = useState();
 
+    const toast = useToast();
+
     useEffect(() => {
         // Wait for currentUser data
 
@@ -63,6 +65,7 @@ const MyRecipesComponent = () => {
             return;
         }
         populateTable();
+
     }, [currentUser]);
 
     const populateTable = () => {
@@ -92,7 +95,12 @@ const MyRecipesComponent = () => {
         MakeDELETE('/api/recipes/' + deleteURL)
             .then(setTimeout(() => {
                 navigate("/deleted")
-            }, 100))
+            }, 100), toast({
+                title: "Recipe Deleted",
+                status: "error",
+                duration: 3000,
+                isClosable: true
+            }))
 
 
     };
@@ -112,9 +120,14 @@ const MyRecipesComponent = () => {
                     ...activeRecipe
                 }
             }
-        }).then(setTimeout(() => {
-            navigate("/deleted")
-        }, 100))
+        }).then(
+            setTimeout(() => {
+                navigate("/deleted")
+            }, 100), toast({
+                title: "Recipe Saved",
+                duration: 3000,
+                isClosable: true
+            }))
     }
 
     const handleTimeChange = (e) => {
@@ -125,6 +138,23 @@ const MyRecipesComponent = () => {
         const { name, value } = e.target;
         setActiveRecipe({ ...activeRecipe, [name]: value });
     }
+
+    // const handleShareToggle = (e, data) => {
+    //     const name = e.target.getAttribute('name');
+    //     setResponseID(e.target.getAttribute('name'));
+    //     console.log(responseID)
+
+    //     MakeGET('/api/recipes/' + e.target.name).then(response => {
+    //         setActiveRecipe(response.data.attributes.recipedata)
+    //         console.log(response.data.attributes.recipedata)
+    //     }).then(
+    //         activeRecipe.share === false
+    //         ? setActiveRecipe(prev => ({...prev, share: true}))
+    //         : setActiveRecipe(prev => ({...prev, share: false}))
+    //     )
+        
+        
+    // }
 
     return (
         <div>
@@ -177,21 +207,21 @@ const MyRecipesComponent = () => {
                     <Heading>My Recipes</Heading>
                     <Table variant='striped' colorScheme='blue'>
                         <TableCaption>
-                        <Wrap justify='center'>
-                            <NewRecipe onSave={(newRecipe) => {
-                                MakePOST("/api/recipes", {
-                                    data: {
-                                        user: currentUser.id,
-                                        recipedata: { ...newRecipe }
-                                    }
-                                }).then((response) => {
-                                    setResponseID(response.data.id)
-                                    setRecipes({
-                                        ...recipes,
-                                        [response.data.id]: newRecipe
+                            <Wrap justify='center'>
+                                <NewRecipe onSave={(newRecipe) => {
+                                    MakePOST("/api/recipes", {
+                                        data: {
+                                            user: currentUser.id,
+                                            recipedata: { ...newRecipe }
+                                        }
+                                    }).then((response) => {
+                                        setResponseID(response.data.id)
+                                        setRecipes({
+                                            ...recipes,
+                                            [response.data.id]: newRecipe
+                                        })
                                     })
-                                })
-                            }} />
+                                }} />
                             </Wrap>
                         </TableCaption>
                         <Thead>
@@ -200,7 +230,7 @@ const MyRecipesComponent = () => {
                                 <Th>Time Required</Th>
                                 <Th>Notes</Th>
                                 <Th><Center>Share</Center></Th>
-                                <Th><Center>Edit</Center></Th>
+                                {/* <Th><Center>Edit</Center></Th> */}
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -208,14 +238,34 @@ const MyRecipesComponent = () => {
                                 const recipe = recipes[key];
                                 const recipeID = key;
 
-                                console.log(recipeID);
+                                {/* console.log(recipeID);
+                                console.log('recipe', recipe.share === true); */}
 
                                 return (
                                     <Tr>
                                         <Td _hover={{ color: '#7B68EE' }}><Heading size='sm'><a href={recipe.url} target="_blank">{recipe.title}</a></Heading></Td>
                                         <Td>{recipe.time}</Td>
                                         <Td>{recipe.notes}</Td>
-                                        <Td><Center><Checkbox></Checkbox></Center></Td>
+
+                                        {/* {recipe.share === true
+                                            ?
+                                            <>
+                                                <Td><Center><Checkbox
+                                                    name={recipeID}
+                                                    onChange={event => handleShareToggle(event)} defaultChecked>
+                                                </Checkbox></Center></Td>
+                                            </>
+    
+                                            :
+                                            <>
+                                                <Td><Center><Checkbox
+                                                    name={recipeID}
+                                                    onChange={event => handleShareToggle(event)}>
+                                                </Checkbox></Center></Td>
+                                            </>
+                                        } */}
+
+
                                         <Td>
                                             <Menu>
                                                 {({ isOpen }) => (
