@@ -7,7 +7,7 @@ export default () => {
     
     return (
         <Box p={4} shadow="md" d='flex'>
-            <Heading ml={2}>Cook Share</Heading>
+            <Heading ml={2}>Family Cookbook</Heading>
             <Spacer />
             <Button leftIcon={colorMode == 'dark' ? <FiMoon/> : <FiSun/>} onClick={() => {
                 if (colorMode.colorMode == 'dark') {
