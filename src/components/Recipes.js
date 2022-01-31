@@ -1,10 +1,8 @@
 import { Box, Heading, Flex, HStack, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import NewRecipe from "./NewRecipe";
 
 import {
     Table,
