@@ -17,12 +17,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import NewRecipe from "./NewRecipe";
-import DeletedComponent from "./DeletedComponent";
 import { IoIosArrowDown } from "react-icons/io";
 
 import { Input, Select, Stack } from "@chakra-ui/react";
@@ -61,16 +59,13 @@ import {
 import {
   MakeGET,
   MakePOST,
-  MakePOST2,
   MakeDELETE,
   MakePUT,
 } from "./helper/Request";
 import { useUser } from "./Auth/useUser";
-import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
 const MyRecipesComponent = () => {
-  let navigate = useNavigate();
   const currentUser = useUser();
   const [recipes, setRecipes] = useState({});
   const [modalState, setModalState] = useState();
@@ -81,14 +76,15 @@ const MyRecipesComponent = () => {
 
   const toast = useToast();
 
-  useEffect(() => {
-    // Wait for currentUser data
+  useEffect(
+    () => {
+      // Wait for currentUser data
 
-    if (!currentUser) {
-      return;
-    }
-    populateTable();
-  }, [currentUser], [recipes]);
+      populateTable();
+    },
+    [currentUser],
+    [recipes]
+  );
 
   const populateTable = () => {
     MakeGET("/api/recipes").then((response) => {
@@ -111,17 +107,16 @@ const MyRecipesComponent = () => {
 
   const handleDelete = (e) => {
     const deleteURL = e.target.name;
-    MakeDELETE("/api/recipes/" + deleteURL).then(() => {
-    }).then(
-        _.unset(recipes, deleteURL),
-        setRecipes({...recipes}),
-    )
+    MakeDELETE("/api/recipes/" + deleteURL).then(
+      _.unset(recipes, deleteURL),
+      setRecipes({ ...recipes })
+    );
     toast({
       title: "Recipe Deleted",
       status: "error",
       duration: 3000,
       isClosable: true,
-    });    
+    });
   };
 
   const handleModalOpen = (e) => {
@@ -139,16 +134,12 @@ const MyRecipesComponent = () => {
           ...activeRecipe,
         },
       },
-    }).then(
-      setTimeout(() => {
-        navigate("/deleted");
-      }, 100),
-      toast({
-        title: "Recipe Saved",
-        duration: 3000,
-        isClosable: true,
-      })
-    );
+    }).then(populateTable);
+    toast({
+      title: "Recipe Saved",
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   const handleTimeChange = (e) => {
@@ -186,7 +177,7 @@ const MyRecipesComponent = () => {
           <ModalBody>
             <Stack spacing={4} p={4}>
               <FormControl>
-                <FormLabel htmlFor="title">Username</FormLabel>
+                <FormLabel htmlFor="title">Recipe Name</FormLabel>
                 <Input
                   id="title"
                   name="title"

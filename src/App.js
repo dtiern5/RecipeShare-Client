@@ -6,7 +6,6 @@ import Register from "./components/Auth/Register";
 import RecipesComponent from "./components/Recipes";
 import MyRecipesComponent from "./components/MyRecipes";
 import ProfileComponent from "./components/Profile";
-import DeletedComponent from "./components/DeletedComponent";
 
 
 const App = () => {
@@ -47,11 +46,6 @@ const App = () => {
           path="/profile"
           exact
           element={<ProfileComponent />}>
-        </Route>
-        <Route
-          path="/deleted"
-          exact
-          element={<DeletedComponent />}>
         </Route>
       </Routes>
     </BrowserRouter>
