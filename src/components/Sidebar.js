@@ -1,6 +1,7 @@
 import { Box, Button, Center, Heading, List, ListItem, Spacer, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import { Link } from 'react-router-dom';
+import { IoMdPerson } from "react-icons/io";
 import { GrRestaurant } from "react-icons/gr";
 import { GiKnifeFork } from "react-icons/gi";
 import { useUser } from "./Auth/useUser";
