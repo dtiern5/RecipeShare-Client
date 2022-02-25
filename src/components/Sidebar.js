@@ -5,7 +5,6 @@ import { IoMdPerson } from "react-icons/io";
 import { GrRestaurant } from "react-icons/gr";
 import { GiKnifeFork } from "react-icons/gi";
 import { useUser } from "./Auth/useUser";
-import { useState } from "react";
 
 const Sidebar = () => {
     const user = useUser();
